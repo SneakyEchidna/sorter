@@ -1,31 +1,44 @@
 class Sorter {
   constructor() {
-    // your implementation
+    this.db = {};
+    this.comparator = (left, right) => left - right;
   }
 
   add(element) {
-    // your implementation
+    this.db[Object.keys(this.db).length || 0] = element;
+    // console.log(this.db);
   }
 
   at(index) {
-    // your implementation
+    return this.db[index];
   }
 
   get length() {
-    // your implementation
+    return Object.keys(this.db).length;
   }
 
   toArray() {
-    // your implementation
+    return Object.entries(this.db).map((e) => e[1]);
   }
 
   sort(indices) {
-    // your implementation
+    let sorted
+    let sortBox = Object.entries(this.db).filter((e) => {
+      return indices.includes(Number(e[0]));
+    });
+    let extracted = sortBox.map((e) => e[1]);
+    if (this.comparator) {
+      sorted = extracted.sort(this.comparator);
+    } else { sorted = extracted.sort(); }
+
+    let sortedArray = sortBox.map((e, i) => {
+      return [e[0], e[1] = sorted[i]];
+    });
+    sortedArray.map(e => this.db[e[0]] = e[1])
   }
 
   setComparator(compareFunction) {
-    // your implementation
+    this.comparator = compareFunction;
   }
 }
-
 module.exports = Sorter;
