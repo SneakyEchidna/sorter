@@ -6,7 +6,6 @@ class Sorter {
 
   add(element) {
     this.db[Object.keys(this.db).length || 0] = element;
-    // console.log(this.db);
   }
 
   at(index) {
